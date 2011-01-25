@@ -1,0 +1,246 @@
+@import "lib/views/stylesheets/reset.less";
+
+@footer_height: 90px;
+@header_height: 66px;
+
+body {
+  font-family: "myriad-pro-1", "myriad-pro-2";
+  word-spacing:0.1em;
+  font-size: 16px;
+  line-height: 1.4em;
+
+  a {
+    text-decoration: none;
+    color: #511036;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: #333;
+  }
+
+}
+
+#content {
+  position: relative;
+  padding-top: @header_height;
+  padding-bottom: @footer_height;
+
+  #header {
+    background: #000;
+    color: white;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+
+    h1 {
+      font-size: 1.4em;
+      font-weight: 100;
+      padding: 0.5em 1em;
+
+      a {
+        font-weight: 400;
+      }
+    }
+
+    a {
+      color: white;
+    }
+
+    a:hover {
+      color: #ddd;
+    }
+
+    #user_info {
+      position: absolute;
+      top: 0.5em;
+      right: 1em;
+      font-weight: 400;
+      label {
+        font-size: 1em;
+        padding-right: 1em;
+      }
+      input {
+        font-size: 1.2em;
+      }
+    }
+
+    #top {
+      width:100%;
+      background-color: #444;
+      height: 22px;
+      ol#ci {
+        z-index: -1000;
+        display:block;
+        padding-left:3px;
+        height: 21px;
+        li {
+          display:block;
+          float:left;
+          margin:3px;
+          padding:0;
+          width:15px;
+          height: 15px;
+          border-bottom-left-radius: 0.2em 0.2em;
+          border-bottom-right-radius: 0.2em 0.2em;
+          border-top-left-radius: 0.2em 0.2em;
+          border-top-right-radius: 0.2em 0.2em;
+          span {
+            display:none;
+          }
+        }
+        li.success {
+          background-color: #383;
+        }
+        li.failure {
+          background-color: #cc3333;
+        }
+        span.content {
+          position:absolute;
+          background-color: #444;
+          top:@header_height + 2;
+          padding:5px;
+          font-size:0.8em;
+        }
+      }
+      .build_failure {
+        background-color: #944;
+      }
+    }
+  }
+
+  .fluid {
+    overflow: auto;
+  }
+
+  #left_panel {
+    position: fixed;
+    left: 0;
+    width: 70%;
+  }
+
+  #right_panel {
+    position: fixed;
+    right: 0;
+    width: 29.98%;
+  }
+
+  ol#chat {
+
+    .message:first-child {
+      border-top: 1px solid #eee
+    }
+      .meta {
+        color: #aaa !important;
+        font-weight: 100;
+
+        a {
+          color: #aaa !important;
+          font-weight: 100;
+        }
+      }
+
+    .no_from_change {
+      display: none;
+    }
+
+  }
+
+  ol#misc {
+
+    li.message {
+      padding: 0.5em 1em 1em 1em;
+    }
+
+  }
+
+  #presence ol {
+    padding: 0.3em;
+    background-color: #f4fafa;
+  }
+
+  #footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: @footer_height;
+
+    div#input {
+      height: @footer_height - 10px;
+      border-top: 1px solid #ccc;
+      background: #eee;
+      textarea {
+        display: block;
+        width: 99.6%;
+        height: 80%;
+        font-size: 16px;
+        font-family: "myriad-pro-1", "myriad-pro-2";
+      }
+    }
+
+  }
+
+  .message, .history_link {
+    position: relative;
+    padding: 0.8em 13em 0.5em 5em;
+    font-size: 16px;
+    border-top: 1px solid #f4fafa;
+    line-height: 1.6em;
+
+    .from {
+      position: absolute;
+      left: 1em;
+      width: 3.4em;
+      overflow: hidden;
+    }
+
+    a.time-sent {
+      font-weight: 400;
+      color: #aaa;
+      position: absolute;
+      right: 1em;
+      text-align: right;
+    }
+
+    .content {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .message:hover {
+    background: #f4fafa;
+  }
+
+  .message.you {
+    background-color: #F9F6E5;
+  }
+
+  .message pre {
+    font-family: "droid-sans-mono-1","droid-sans-mono-2";
+    font-size: 14px;
+    margin-left: 0em;
+    margin-right: 1em;
+    xbackground: #f9f9f9;
+    border: 1px dotted #d4dada;
+    width: 100%;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    overflow: auto;
+  }
+}
+
+.message.tweet {
+  color: #76A7BE;
+  a {
+    color: #76A7BE;
+  }
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}

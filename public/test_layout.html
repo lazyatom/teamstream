@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>test_layout</title>
+	<style>
+	* {
+	  margin: 0;
+	  padding: 0;
+	}
+	
+	#header, #footer {
+	  background-color: red;
+	  height: 56px;
+	  width: 100%;
+	}
+
+  #footer {
+    position: fixed;
+    bottom: 0;
+  }
+
+	#left_panel {
+	  position: fixed;
+	  left: 0;
+	  background-color: yellow;
+	  width: 70%;
+	}
+	
+	#right_panel {
+	  position: fixed;
+	  right: 0;
+	  background-color: cyan;
+	  width: 29.98%;
+	}
+	
+	#presence_panel {
+	  background-color: magenta;
+	}
+	
+	#github {
+	  background-color: brown;
+	}
+
+  .fluid {
+    overflow: auto;
+  }
+	</style>
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+  <script>
+
+  $.fn.scrollToBottom = function() {
+    var panel = this;
+    var fixedSiblings = $(panel).siblings(".fixed");
+    var reductionInHeight = 0;
+    $.each(fixedSiblings, function(i, sibling) {
+      reductionInHeight = reductionInHeight + $(sibling).height();
+    })
+    var parent = $(panel).parent();
+    $(panel).height($(parent).height() - reductionInHeight);
+    
+    // now actually scroll
+    var pos = panel[0].scrollHeight - panel[0].clientHeight;
+    panel[0].scrollTop = pos;
+  }
+
+  function doResizeStuff() {
+    $("#container").height($(window).height()-1); // stops flicker?
+    // $(".fluid").scrollToBottom(); // for some reason this fucks up...
+    $.each($(".fluid"), function(i, panel) {
+      $(panel).scrollToBottom();
+    })
+  }
+
+  $(function() {
+    doResizeStuff();
+    $(window).resize(doResizeStuff)
+  })
+  </script>
+</head>
+
+<body>
+
+<div id="container">
+  <div id="header" class="fixed">
+    <p>header</p>
+  </div>
+  <div id="left_panel" class="fluid">
+    <div class="fixed" style="height: 100px; background-color: black; color: white">monkey</div>
+    <ol class="fluid">
+      <li>Chat message 0</li>
+      <li>Chat message 1</li>
+      <li>Chat message 2</li>
+      <li>Chat message 3</li>
+      <li>Chat message 4</li>
+      <li>Chat message 5</li>
+      <li>Chat message 6</li>
+      <li>Chat message 7</li>
+      <li>Chat message 8</li>
+      <li>Chat message 9</li>
+      <li>Chat message 10</li>
+      <li>Chat message 11</li>
+      <li>Chat message 12</li>
+      <li>Chat message 13</li>
+      <li>Chat message 14</li>
+      <li>Chat message 15</li>
+      <li>Chat message 16</li>
+      <li>Chat message 17</li>
+      <li>Chat message 18</li>
+      <li>Chat message 19</li>
+      <li>Chat message 20</li>
+      <li>Chat message 21</li>
+      <li>Chat message 22</li>
+      <li>Chat message 23</li>
+      <li>Chat message 24</li>
+      <li>Chat message 25</li>
+      <li>Chat message 26</li>
+      <li>Chat message 27</li>
+      <li>Chat message 28</li>
+      <li>Chat message 29</li>
+      <li>Chat message 30</li>
+      <li>Chat message 31</li>
+      <li>Chat message 32</li>
+      <li>Chat message 33</li>
+      <li>Chat message 34</li>
+      <li>Chat message 35</li>
+      <li>Chat message 36</li>
+      <li>Chat message 37</li>
+      <li>Chat message 38</li>
+      <li>Chat message 39</li>
+      <li>Chat message 40</li>
+      <li>Chat message 41</li>
+      <li>Chat message 42</li>
+      <li>Chat message 43</li>
+      <li>Chat message 44</li>
+      <li>Chat message 45</li>
+      <li>Chat message 46</li>
+      <li>Chat message 47</li>
+      <li>Chat message 48</li>
+      <li>Chat message 49</li>
+      <li>Chat message 50</li>
+      <li>Chat message 51</li>
+      <li>Chat message 52</li>
+      <li>Chat message 53</li>
+      <li>Chat message 54</li>
+      <li>Chat message 55</li>
+      <li>Chat message 56</li>
+      <li>Chat message 57</li>
+      <li>Chat message 58</li>
+      <li>Chat message 59</li>
+      <li>Chat message 60</li>
+      <li>Chat message 61</li>
+      <li>Chat message 62</li>
+      <li>Chat message 63</li>
+      <li>Chat message 64</li>
+      <li>Chat message 65</li>
+      <li>Chat message 66</li>
+      <li>Chat message 67</li>
+      <li>Chat message 68</li>
+      <li>Chat message 69</li>
+      <li>Chat message 70</li>
+      <li>Chat message 71</li>
+      <li>Chat message 72</li>
+      <li>Chat message 73</li>
+      <li>Chat message 74</li>
+      <li>Chat message 75</li>
+      <li>Chat message 76</li>
+      <li>Chat message 77</li>
+      <li>Chat message 78</li>
+      <li>Chat message 79</li>
+      <li>Chat message 80</li>
+      <li>Chat message 81</li>
+      <li>Chat message 82</li>
+      <li>Chat message 83</li>
+      <li>Chat message 84</li>
+      <li>Chat message 85</li>
+      <li>Chat message 86</li>
+      <li>Chat message 87</li>
+      <li>Chat message 88</li>
+      <li>Chat message 89</li>
+      <li>Chat message 90</li>
+      <li>Chat message 91</li>
+      <li>Chat message 92</li>
+      <li>Chat message 93</li>
+      <li>Chat message 94</li>
+      <li>Chat message 95</li>
+      <li>Chat message 96</li>
+      <li>Chat message 97</li>
+      <li>Chat message 98</li>
+      <li>Chat message 99</li>
+    </ol>
+  </div>
+  <div id="right_panel" class="fluid">
+    <ol id="presence_panel" class="fixed">
+      <li>Presence 0</li>
+      <li>Presence 1</li>
+      <li>Presence 2</li>
+      <li>Presence 3</li>
+    </ol>
+    <ol class="fixed">
+      <li>monkey 0</li>
+      <li>monkey 1</li>
+    </ol>
+    <ol id="github" class="fluid">
+      <li>Github message 0</li>
+      <li>Github message 1</li>
+      <li>Github message 2</li>
+      <li>Github message 3</li>
+      <li>Github message 4</li>
+      <li>Github message 5</li>
+      <li>Github message 6</li>
+      <li>Github message 7</li>
+      <li>Github message 8</li>
+      <li>Github message 9</li>
+      <li>Github message 10</li>
+      <li>Github message 11</li>
+      <li>Github message 12</li>
+      <li>Github message 13</li>
+      <li>Github message 14</li>
+      <li>Github message 15</li>
+      <li>Github message 16</li>
+      <li>Github message 17</li>
+      <li>Github message 18</li>
+      <li>Github message 19</li>
+      <li>Github message 20</li>
+      <li>Github message 21</li>
+      <li>Github message 22</li>
+      <li>Github message 23</li>
+      <li>Github message 24</li>
+      <li>Github message 25</li>
+      <li>Github message 26</li>
+      <li>Github message 27</li>
+      <li>Github message 28</li>
+      <li>Github message 29</li>
+      <li>Github message 30</li>
+      <li>Github message 31</li>
+      <li>Github message 32</li>
+      <li>Github message 33</li>
+      <li>Github message 34</li>
+      <li>Github message 35</li>
+      <li>Github message 36</li>
+      <li>Github message 37</li>
+      <li>Github message 38</li>
+      <li>Github message 39</li>
+      <li>Github message 40</li>
+      <li>Github message 41</li>
+      <li>Github message 42</li>
+      <li>Github message 43</li>
+      <li>Github message 44</li>
+      <li>Github message 45</li>
+      <li>Github message 46</li>
+      <li>Github message 47</li>
+      <li>Github message 48</li>
+      <li>Github message 49</li>
+      <li>Github message 50</li>
+      <li>Github message 51</li>
+      <li>Github message 52</li>
+      <li>Github message 53</li>
+      <li>Github message 54</li>
+      <li>Github message 55</li>
+      <li>Github message 56</li>
+      <li>Github message 57</li>
+      <li>Github message 58</li>
+      <li>Github message 59</li>
+      <li>Github message 60</li>
+      <li>Github message 61</li>
+      <li>Github message 62</li>
+      <li>Github message 63</li>
+      <li>Github message 64</li>
+      <li>Github message 65</li>
+      <li>Github message 66</li>
+      <li>Github message 67</li>
+      <li>Github message 68</li>
+      <li>Github message 69</li>
+      <li>Github message 70</li>
+      <li>Github message 71</li>
+      <li>Github message 72</li>
+      <li>Github message 73</li>
+      <li>Github message 74</li>
+      <li>Github message 75</li>
+      <li>Github message 76</li>
+      <li>Github message 77</li>
+      <li>Github message 78</li>
+      <li>Github message 79</li>
+      <li>Github message 80</li>
+      <li>Github message 81</li>
+      <li>Github message 82</li>
+      <li>Github message 83</li>
+      <li>Github message 84</li>
+      <li>Github message 85</li>
+      <li>Github message 86</li>
+      <li>Github message 87</li>
+      <li>Github message 88</li>
+      <li>Github message 89</li>
+      <li>Github message 90</li>
+      <li>Github message 91</li>
+      <li>Github message 92</li>
+      <li>Github message 93</li>
+      <li>Github message 94</li>
+      <li>Github message 95</li>
+      <li>Github message 96</li>
+      <li>Github message 97</li>
+      <li>Github message 98</li>
+      <li>Github message 99</li>
+    </ol>
+  </div>
+  <div id="footer" class="fixed">
+    <p>footer</p>
+  </div>
+</div>
+
+</body>
+</html>

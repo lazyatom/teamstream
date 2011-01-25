@@ -1,0 +1,96 @@
+<html>
+<head>
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/pisswhistle.js"></script>
+<script type="text/javascript">
+var Base = {
+  allMessages: '*'
+}
+
+$(document).ready(function () {
+  PissWhistle.addHandler({
+    respondTo: ['ci'],
+    process: function(data) {
+      var selector = "#builds #" + data.original.repo_name;
+      if ($(selector).length == 0) {
+        $("#builds").append($("<li id=\"" + data.original.repo_name + "\"><h2>" + data.original.repo_name + "</h2><ul class=\"history\"></ul></li>"));
+      }
+      var blob = $("<li></li>");
+      blob.addClass(data.original.result);
+      var link = $("<a href=\"\" title=\"" + data.original.message + "\"></a>");
+      link.append(blob);
+
+      $(selector + " .history").prepend(link);
+      $(selector + " h2").removeClass();
+      $(selector + " h2").addClass(data.original.result);
+    }
+  })
+
+  PissWhistle.initialize('test');
+  PissWhistle.loadMessages('ci');
+
+  //PissWhistle.connect();
+})
+
+</script>
+<style>
+  body {
+    color: white;
+    background: black;
+    font: 24px Helvetica;
+  }
+
+  ul {
+    display: inline-block;
+    list-style: none;
+    margin: none;
+    padding: none;
+  }
+
+  h2 {
+    -webkit-border-radius: 0.2em;
+    padding: 4px 16px 4px 16px;
+    font-weight: normal;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .failure {
+    background: #944;
+  }
+
+  .success {
+    background: #383;
+  }
+
+  .aborted {
+    background: #555;
+  }
+
+  .red_anime, .blue_anime {
+    background: #449;
+  }
+
+  .history li {
+    -webkit-border-radius: 0.3em;
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    margin-right: 8px;
+    float: left;
+  }
+
+  li.build {
+    clear: both;
+    padding: 8px;
+  }
+</style>
+</head>
+<body>
+  <ul id="builds">
+  </ul>
+</body>
+</html>
