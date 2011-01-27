@@ -1,18 +1,18 @@
 GIT
   remote: git://github.com/freerange/freerange-puppet.git
-  revision: b62994301d6d57cf2fb25e78e0f882fbb1899b0a
-  branch: support-ubuntu
+  revision: 36e3d431511ded756d88916bf97c53625ec16cd1
+  tag: v1.1.17
   specs:
-    freerange-puppet (1.0.20)
+    freerange-puppet (1.1.17)
       capistrano
       capistrano-ext
 
 GIT
   remote: http://github.com/freerange/deploy.git
-  revision: cc6a22d55144422fef8792d3b317c67bc18d4e70
-  tag: v1.0.10
+  revision: 6b2bb03cf4fa9897dfd31634fcd43d02670c2d0c
+  tag: v1.0.11
   specs:
-    freerange-deploy (1.0.10)
+    freerange-deploy (1.0.11)
       capistrano
       capistrano-ext
       json
@@ -44,7 +44,7 @@ GEM
     httparty (0.7.3)
       crack (= 0.1.8)
     i18n (0.5.0)
-    json (1.5.0)
+    json (1.5.1)
     json_pure (1.5.1)
     less (1.2.21)
       mutter (>= 0.4.2)
