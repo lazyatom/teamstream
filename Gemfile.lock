@@ -1,18 +1,18 @@
 GIT
   remote: git://github.com/freerange/freerange-puppet.git
-  revision: b62994301d6d57cf2fb25e78e0f882fbb1899b0a
-  branch: support-ubuntu
+  revision: 36e3d431511ded756d88916bf97c53625ec16cd1
+  tag: v1.1.17
   specs:
-    freerange-puppet (1.0.20)
+    freerange-puppet (1.1.17)
       capistrano
       capistrano-ext
 
 GIT
   remote: http://github.com/freerange/deploy.git
-  revision: cc6a22d55144422fef8792d3b317c67bc18d4e70
-  tag: v1.0.10
+  revision: 6b2bb03cf4fa9897dfd31634fcd43d02670c2d0c
+  tag: v1.0.11
   specs:
-    freerange-deploy (1.0.10)
+    freerange-deploy (1.0.11)
       capistrano
       capistrano-ext
       json
@@ -33,13 +33,19 @@ GEM
       net-ssh-gateway (>= 1.0.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
+    childprocess (0.1.6)
+      ffi (~> 0.6.3)
     crack (0.1.8)
     eventmachine (0.12.10)
+    ffi (0.6.3)
+      rake (>= 0.8.7)
     haml (3.0.25)
     highline (1.6.1)
     httparty (0.7.3)
       crack (= 0.1.8)
-    json (1.5.0)
+    i18n (0.5.0)
+    json (1.5.1)
+    json_pure (1.5.1)
     less (1.2.21)
       mutter (>= 0.4.2)
       treetop (>= 1.4.2)
@@ -60,6 +66,12 @@ GEM
       right_http_connection (>= 1.2.1)
     right_http_connection (1.2.4)
     roauth (0.0.3)
+    rubyzip (0.9.4)
+    selenium-webdriver (0.1.2)
+      childprocess (~> 0.1.5)
+      ffi (~> 0.6.3)
+      json_pure
+      rubyzip
     sinatra (1.1.2)
       rack (~> 1.1)
       tilt (~> 1.2)
@@ -86,7 +98,9 @@ DEPENDENCIES
   freerange-deploy!
   freerange-puppet!
   haml
+  i18n
   less
   rake
+  selenium-webdriver
   sinatra
   sprockets
