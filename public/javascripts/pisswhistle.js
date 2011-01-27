@@ -125,8 +125,8 @@ var PissWhistle = {
 
   connect: function() {
     this.connection.create(this.stream_name);
+    test_connecting = setInterval('PissWhistle.connection.ensureReadyStateReached()', 1000);
     // for now poll, perhaps require elegant notification of restart from websocket server?
-    test_connecting = setInterval('PissWhistle.connection.check()', 1000);
     setTimeout('PissWhistle.check_and_reconnect()',10000);
   },
 
@@ -151,14 +151,21 @@ var PissWhistle = {
       client_identifier: "K7U2x3qk8VuMtySA",
       client_secret: "A8FrX7wO1uDrNZ4op1sQ4UVKIfafiIuP"
     },
+    latestHeartbeat: null,
+    acceptableLag: 10,
 
     create: function(stream_name) {
       var self = this;
+      if (self.socket) {
+        self.socket.close();
+        self.socket = null;
+      }
       this.ensureAuthenticated(function(token) {
         self.socket = new WebSocket('ws://'+self.stream_host+':' + self.stream_port + '/' + stream_name + '/client?oauth_token=' + token);
         self.socket.onopen = self.onopen;
         self.socket.onmessage = self.onmessage;
         self.socket.onclose = self.onclose;
+        self.socket.onerror = self.onerror;
       })
     },
 
@@ -167,9 +174,14 @@ var PissWhistle = {
       console.log("Connection opened");
     },
 
+    onerror: function(m) {
+      console.log("Websocket Error", m);
+    },
+
     send: function(object){
       if (this.socket) {
-        this.socket.send(JSON.stringify(object));
+        var result = this.socket.send(JSON.stringify(object))
+        console.log("result of sending", result);
       }
     },
 
@@ -179,11 +191,16 @@ var PissWhistle = {
         if (data["error"]) {
           clearInterval(test_connecting);
           console.log(data["error"]);
-        }
-        else {
+        } else if (data["heartbeat"]) {
+          PissWhistle.connection.updateHeartbeat(data["heartbeat"]);
+        } else {
           PissWhistle.process(data);
         }
       }
+    },
+
+    updateHeartbeat: function(timestamp) {
+      this.latestHeartbeat = timestamp;
     },
 
     onclose: function(m) {
@@ -191,7 +208,7 @@ var PissWhistle = {
       this.socket=null;
     },
 
-    check: function() {
+    ensureReadyStateReached: function() {
       // testing http://dev.w3.org/html5/websockets/#dom-websocket-readystate
       if (this.socket.readyState != 1) {
         // NOTE: If this is 0 it could stay in connecting for a while, would this affect the browser's performance.
@@ -203,7 +220,12 @@ var PissWhistle = {
     },
 
     is_connected: function() {
-      return (this.socket.readyState == 1);
+      var now = new Date().getTime()/1000;
+      var x = this.latestHeartbeat + this.acceptableLag;
+      console.log("latest heartbeat", this.latestHeartbeat);
+      console.log("acceptable lag", this.acceptableLag);
+      console.log("comparing", x, now);
+      return x > now;
     },
 
     loadMessages: function(stream_name, type, callback) {
