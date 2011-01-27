@@ -145,7 +145,7 @@ var PissWhistle = {
   connection: {
     stream_host: window.location.hostname,
     stream_port: 5032,
-    // stream_host: 'teamstream.gofreerange.com', // override, useful for debugging
+    // stream_host: 'pisswhistle.gofreerange.com', // override, useful for debugging
     oauth: {
       token: $.cookie('oauth_token'),
       client_identifier: "K7U2x3qk8VuMtySA",
