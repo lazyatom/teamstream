@@ -33,13 +33,19 @@ GEM
       net-ssh-gateway (>= 1.0.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
+    childprocess (0.1.6)
+      ffi (~> 0.6.3)
     crack (0.1.8)
     eventmachine (0.12.10)
+    ffi (0.6.3)
+      rake (>= 0.8.7)
     haml (3.0.25)
     highline (1.6.1)
     httparty (0.7.3)
       crack (= 0.1.8)
+    i18n (0.5.0)
     json (1.5.0)
+    json_pure (1.5.1)
     less (1.2.21)
       mutter (>= 0.4.2)
       treetop (>= 1.4.2)
@@ -60,6 +66,12 @@ GEM
       right_http_connection (>= 1.2.1)
     right_http_connection (1.2.4)
     roauth (0.0.3)
+    rubyzip (0.9.4)
+    selenium-webdriver (0.1.2)
+      childprocess (~> 0.1.5)
+      ffi (~> 0.6.3)
+      json_pure
+      rubyzip
     sinatra (1.1.2)
       rack (~> 1.1)
       tilt (~> 1.2)
@@ -86,7 +98,9 @@ DEPENDENCIES
   freerange-deploy!
   freerange-puppet!
   haml
+  i18n
   less
   rake
+  selenium-webdriver
   sinatra
   sprockets
