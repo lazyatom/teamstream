@@ -51,7 +51,7 @@ $.fn.isScrollAtBottom = function() {
   var panel = this;
   pos = panel[0].scrollTop - (panel[0].scrollHeight - panel[0].clientHeight);
   if (panel.attr("id") == "chat") {
-    console.log(panel.attr("id") + ": pos=" + pos + " pos+last=" + (pos + $(panel).children().last().outerHeight()));
+    //console.log(panel.attr("id") + ": pos=" + pos + " pos+last=" + (pos + $(panel).children().last().outerHeight()));
   }
   return pos == 0 || (pos + $(panel).children().last().outerHeight()) == 0;
 }
