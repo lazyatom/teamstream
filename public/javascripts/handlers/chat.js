@@ -54,7 +54,7 @@ $.extend(Chat.prototype, {
   setupInput: function() {
     this.input.attr('autocomplete','OFF');
     var self = this;
-    this.input.keyup(function(ev) {
+    this.input.keydown(function(ev) {
       var keyc = self.getKeyCode(ev);
       if (keyc == 13 || keyc == 10) {
         self.send($.trim(self.input.val()));
