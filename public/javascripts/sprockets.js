@@ -842,7 +842,6 @@ $.fn.isScrollAtBottom = function() {
   var panel = this;
   pos = panel[0].scrollTop - (panel[0].scrollHeight - panel[0].clientHeight);
   if (panel.attr("id") == "chat") {
-    console.log(panel.attr("id") + ": pos=" + pos + " pos+last=" + (pos + $(panel).children().last().outerHeight()));
   }
   return pos == 0 || (pos + $(panel).children().last().outerHeight()) == 0;
 }
@@ -1334,7 +1333,7 @@ $.extend(Chat.prototype, {
   setupInput: function() {
     this.input.attr('autocomplete','OFF');
     var self = this;
-    this.input.keyup(function(ev) {
+    this.input.keydown(function(ev) {
       var keyc = self.getKeyCode(ev);
       if (keyc == 13 || keyc == 10) {
         self.send($.trim(self.input.val()));
