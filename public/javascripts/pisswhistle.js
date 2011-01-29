@@ -293,7 +293,7 @@ var PissWhistle = {
         code: authorization_code
       }, function(data) {
         self.oauth.token = data.access_token;
-        $.cookie('oauth_token', self.oauth.token);
+        $.cookie('oauth_token', self.oauth.token, {expires: 365});
         window.history.pushState(null, "without code", window.location.pathname);
         callback(self.oauth.token);
       }, "json")
