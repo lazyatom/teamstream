@@ -31,7 +31,7 @@ $.extend(CI.prototype, {
     contentSpan.append(when);
     message.append(contentSpan);
 
-    if (original.result == "failure") {
+    if (original.result.toLowerCase() == "failure") {
       $("ol#ci").addClass("build_failure");
     }
     else {
