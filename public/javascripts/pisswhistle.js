@@ -220,9 +220,9 @@ var PissWhistle = {
     is_connected: function() {
       var now = new Date().getTime()/1000;
       var x = this.latestHeartbeat + this.acceptableLag;
-      console.log("latest heartbeat", this.latestHeartbeat);
-      console.log("acceptable lag", this.acceptableLag);
-      console.log("comparing", x, now);
+      // console.log("latest heartbeat", this.latestHeartbeat);
+      // console.log("acceptable lag", this.acceptableLag);
+      // console.log("comparing", x, now);
       return x > now;
     },
 
