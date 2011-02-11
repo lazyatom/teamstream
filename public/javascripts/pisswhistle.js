@@ -12,11 +12,9 @@ var PissWhistle = {
 
   resizePanels: function() {
     $("#content").height($(window).height()-1); // stops flicker?
-    // $(".fluid").scrollToBottom(); // for some reason this fucks up...
     $.each($(".fluid"), function(i, panel) {
-      var scrollAtBottom = $(panel).isScrollAtBottom();
       $(panel).resizePanel();
-      if (scrollAtBottom == true) {
+      if ($(panel).attr("id") && Display.panels_scrolling[$(panel).attr("id")] == 0) {
         $(panel).scrollToBottom();
       }
     });

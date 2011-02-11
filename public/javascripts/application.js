@@ -3,6 +3,7 @@
 //= require <jquery.timeago>
 //= require <jquery.cookie>
 //= require <utilities>
+//= require <display>
 //= require <pisswhistle>
 //= require <notifier>
 
@@ -34,5 +35,7 @@ $(document).ready(function () {
 
     setTimeout(function() { PissWhistle.connect()}, 500);
     setTimeout(function() { PissWhistle.scrollPanelsToBottom(); },1000);
+
+    Display.watch_scrolling();
   }
 })
