@@ -10,6 +10,7 @@ CI.prototype.constructor = CI;
 
 $.extend(CI.prototype, {
   respondTo: ['ci', 'hudson'],
+  projects: {},
 
   message: function(data) {
     console.log(data.original);
@@ -18,6 +19,7 @@ $.extend(CI.prototype, {
   },
 
   process: function(data) {
+    this.processProject(data);
     var message = this.message(data);
 
     var original = data.original;
@@ -31,17 +33,31 @@ $.extend(CI.prototype, {
     contentSpan.append(when);
     message.append(contentSpan);
 
-    if (original.result.toLowerCase() == "failure") {
-      $("ol#ci").addClass("build_failure");
-    }
-    else {
-      $("ol#ci").removeClass("build_failure");
-    }
-
     message.hover(function(){
       $(".content",this).toggle();
     });
 
     this.panel.prependAndShow(message);
   },
+
+  processProject: function(data) {
+    if (data.original.build != undefined) {
+      var tmp = data.original.build.workspace.split("/");
+      var project = tmp.reverse()[1].toLowerCase();
+      this.projects[project] = {'result' : data.original.result.toLowerCase()};
+
+      var failureExists = false;
+      for (var i in this.projects) {
+        if (this.projects[i].result == 'failure') {
+          failureExists = true;
+        }
+      }
+
+      if (failureExists) {
+        $("ol#ci").addClass("build_failure");
+      } else {
+        $("ol#ci").removeClass("build_failure");
+      }
+    }
+  }
 });
