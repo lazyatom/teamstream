@@ -55,7 +55,7 @@ var PissWhistle = {
         try {
           handler.process(data, historical);
         } catch(err) {
-          console.log("Error handling message", err, data);
+          console.log("Error handling message", handler, err, data);
         }
       });
     } else {
