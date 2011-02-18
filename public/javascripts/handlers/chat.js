@@ -19,14 +19,6 @@ $.extend(Chat.prototype, {
 
     var from = $.span(data.user, { "class": 'from' });
 
-    if (this.panel.find(".message").length > 0) {
-      var previous_message = this.panel.find(".message").last().data().message;
-      var same_type = (previous_message.type == data.type);
-      var same_user = (previous_message.user == data.user);
-      if (same_user && same_type) {
-        $(from).addClass('no_from_change');
-      }
-    }
     return from;
   },
 
