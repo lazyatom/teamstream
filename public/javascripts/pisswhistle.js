@@ -29,14 +29,14 @@ var PissWhistle = {
 
   send: function(data) {
     var data_with_user = $.extend(data, {'user':this.user});
-    if (this.check_and_reconnect()) {
-      setTimeout(function(){
-        this.connection.send(data_with_user);
-      },500);
-    }
-    else {
+    // if (this.check_and_reconnect()) {
+    //   setTimeout(function(){
+    //     this.connection.send(data_with_user);
+    //   },500);
+    // }
+    // else {
       this.connection.send(data_with_user);
-    }
+    // }
   },
 
   is_new_message: function(data) {
@@ -125,7 +125,7 @@ var PissWhistle = {
     this.connection.create(this.stream_name);
     test_connecting = setInterval('PissWhistle.connection.ensureReadyStateReached()', 1000);
     // for now poll, perhaps require elegant notification of restart from websocket server?
-    setTimeout('PissWhistle.check_and_reconnect()',10000);
+    // setTimeout('PissWhistle.check_and_reconnect()',10000);
   },
 
   check_and_reconnect: function() {
