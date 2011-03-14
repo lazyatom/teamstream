@@ -54,7 +54,9 @@ $.fn.prependAndShow = function(message) {
 
 $.fn.autolink = function () {
   return this.each( function(){
-    var re = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-@]+(?![\w\s?&.\/;#~%"=-]*>))/g;
-    $(this).html( $(this).html().replace(re, '<a href="$1" target="_blank">$1</a>') );
+    var html = linkify($(this).html(), { callback: function(text, href) {
+      return href ? '<a href="' + href + '" title="' + href + '" target="_blank">' + text + '</a>' : text;
+    }});
+    $(this).html(html);
   });
 }

@@ -50,3 +50,17 @@ test("should convert a URL with a query string containing an '@' into an HTML an
   anchor = span.children('a').first();
   equals(anchor.attr('href'), 'http://example.com/?email=chris@seagul.co.uk');
 });
+
+test("should convert a URL without a query string surrounded by parentheses into an HTML anchor tag", function() {
+  span = $.span('(http://www.example.com/somepath/)');
+  span.autolink();
+  anchor = span.children('a').first();
+  equals(anchor.attr('href'), 'http://www.example.com/somepath/');
+});
+
+test("should convert a URL with a query string surrounded by parentheses into an HTML anchor tag", function() {
+  span = $.span('(http://example.com/blah?query=1)');
+  span.autolink();
+  anchor = span.children('a').first();
+  equals(anchor.attr('href'), 'http://example.com/blah?query=1');
+});

@@ -6,6 +6,7 @@
 //= require <display>
 //= require <pisswhistle>
 //= require <notifier>
+//= require <ba-linkify>
 
 $(document).ready(function () {
   PissWhistle.initialize();
