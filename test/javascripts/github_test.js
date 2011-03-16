@@ -95,7 +95,7 @@ test("should include a link to the compare url for the pushed commits in a new w
 })
 
 test("should show when the push happened", function() {
-  equals(world.panel.find(".pushed_at").attr("datetime"), "2010-11-16T13:30:00Z", "This fails because of the format of pushed at. I'm trying to resolve this: http://support.github.com/discussions/post-receive-issues/143-format-of-pushed_at-timestamp-differs-from-other-dates");
+  equals(world.panel.find(".pushed_at").attr("datetime"), "2010-11-16T13:30:00Z");
 })
 
 test("should link the first line of the commit message to open each commit in a new window", function() {
