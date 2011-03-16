@@ -29,14 +29,7 @@ var PissWhistle = {
 
   send: function(data) {
     var data_with_user = $.extend(data, {'user':this.user});
-    // if (this.check_and_reconnect()) {
-    //   setTimeout(function(){
-    //     this.connection.send(data_with_user);
-    //   },500);
-    // }
-    // else {
-      this.connection.send(data_with_user);
-    // }
+    this.connection.send(data_with_user);
   },
 
   is_new_message: function(data) {
@@ -123,19 +116,18 @@ var PissWhistle = {
 
   connect: function() {
     this.connection.create(this.stream_name);
-    test_connecting = setInterval('PissWhistle.connection.ensureReadyStateReached()', 1000);
     // for now poll, perhaps require elegant notification of restart from websocket server?
-    // setTimeout('PissWhistle.check_and_reconnect()',10000);
+    setTimeout('PissWhistle.check_connection()',10000);
   },
 
-  check_and_reconnect: function() {
+  check_connection: function() {
     if (!this.connection.is_connected()) {
-      console.log("reconnecting...");
-      this.connect();
+      console.log("Connection has disconnected for some reason...");
+      $("#disconnected").show();
       return true;
     }
     else {
-      setTimeout('PissWhistle.check_and_reconnect()',10000);
+      setTimeout('PissWhistle.check_connection()',10000);
       return false;
     }
   },
@@ -169,6 +161,7 @@ var PissWhistle = {
 
     onopen: function(m){
       document.title = "PissWhistle"
+      $("#disconnected").hide();
       console.log("Connection opened");
     },
 
@@ -187,7 +180,6 @@ var PissWhistle = {
       if (m.data) {
         var data = JSON.parse(m.data);
         if (data["error"]) {
-          clearInterval(test_connecting);
           console.log(data["error"]);
         } else if (data["heartbeat"]) {
           PissWhistle.connection.updateHeartbeat(data["heartbeat"]);
@@ -206,23 +198,9 @@ var PissWhistle = {
       this.socket=null;
     },
 
-    ensureReadyStateReached: function() {
-      // testing http://dev.w3.org/html5/websockets/#dom-websocket-readystate
-      if (this.socket.readyState != 1) {
-        // NOTE: If this is 0 it could stay in connecting for a while, would this affect the browser's performance.
-        // console.log(this.socket.readyState);
-        console.log("ERROR: Can't connect to backend for some reason....")
-        document.title = "PissWhistle (not connected)"
-      }
-      clearInterval(test_connecting);
-    },
-
     is_connected: function() {
       var now = new Date().getTime()/1000;
       var x = this.latestHeartbeat + this.acceptableLag;
-      // console.log("latest heartbeat", this.latestHeartbeat);
-      // console.log("acceptable lag", this.acceptableLag);
-      // console.log("comparing", x, now);
       return x > now;
     },
 
@@ -280,7 +258,7 @@ var PissWhistle = {
       window.location = 'http://'+this.stream_host+':' + this.stream_port+'/oauth/authorize?client_id=' + this.oauth.client_identifier + '&redirect_uri=' + current_location;
     },
 
-    getAccessCode: function(authorizationCode, callback) { 
+    getAccessCode: function(authorizationCode, callback) {
       console.log("getting access token");
       var self = this;
       $.post('http://'+this.stream_host+':' + this.stream_port+'/oauth/access_token', {
