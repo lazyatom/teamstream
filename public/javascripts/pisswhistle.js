@@ -21,12 +21,6 @@ var PissWhistle = {
     $("#content").height(""); // not sure why this is necessary either
   },
 
-  scrollPanelsToBottom: function() {
-    $(".fluid").each(function(i, panel){
-      $(panel).scrollToBottom();
-    });
-  },
-
   send: function(data) {
     var data_with_user = $.extend(data, {'user':this.user});
     this.connection.send(data_with_user);

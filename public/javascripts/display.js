@@ -12,5 +12,10 @@ var Display = {
         }
       })
     });
+  },
+  scrollPanelsToBottom: function() {
+    $(".fluid").each(function(i, panel){
+      $(panel).scrollToBottom();
+    });
   }
 }

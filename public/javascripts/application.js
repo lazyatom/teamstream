@@ -34,8 +34,8 @@ $(document).ready(function () {
     PissWhistle.loadMessages('chat');
 
     setTimeout(function() { PissWhistle.connect()}, 500);
-    setTimeout(function() { PissWhistle.scrollPanelsToBottom(); },1000);
 
     Display.watch_scrolling();
+    setTimeout(function() { Display.scrollPanelsToBottom(); },1000);
   }
 })
