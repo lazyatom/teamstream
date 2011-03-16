@@ -8,7 +8,7 @@ Presence.prototype = {
   accountList: null,
   process: function(message) {
     var self = this;
-    $("#presence ol").remove();
+    this.panel.find("ol").remove();
     this.accountList = $.ol("");
     this.panel.append(this.accountList);
     $.each(message.accounts, function(i, account) {
