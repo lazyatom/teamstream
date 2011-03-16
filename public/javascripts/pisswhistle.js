@@ -42,8 +42,8 @@ var PissWhistle = {
     }
   },
 
-  process: function(data, historical) {
-    if (historical || this.is_new_message(data)) {
+  process: function(data) {
+    if (this.is_new_message(data)) {
       $.each((this.handlers[data.type] || []).concat(this.globalHandlers), function(i, handler) {
         try {
           handler.process(data);
@@ -66,7 +66,7 @@ var PissWhistle = {
       var earliest_timestamp = $("."+ type + " time").first().attr("title");
       self.connection.loadHistory(self.stream_name, type, earliest_timestamp, function(messages) {
         $($.makeArray(messages).reverse()).each(function(index, message) {
-          self.process(message, true);
+          self.process(message);
         });
         $(".history_link", panel).remove();
         self.addHistoryLink(type, panel);
@@ -133,9 +133,9 @@ var PissWhistle = {
   },
 
   connection: {
-    stream_host: window.location.hostname,
+    //stream_host: window.location.hostname,
     stream_port: 5032,
-    // stream_host: 'pisswhistle.gofreerange.com', // override, useful for debugging
+    stream_host: 'pisswhistle.gofreerange.com', // override, useful for debugging
     oauth: {
       token: $.cookie('oauth_token'),
       client_identifier: "K7U2x3qk8VuMtySA",
