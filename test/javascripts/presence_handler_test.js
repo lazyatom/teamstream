@@ -2,8 +2,8 @@ var world;
 
 module("Presence handler", {
   setup: function() {
+    $("#qunit-fixture").append("<div id='presence'></div>");
     world = {
-      $("#qunit-fixture").append("<div id='presence'></div>");
       presence: new Presence("#qunit-fixture")
     };
   }
