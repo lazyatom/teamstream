@@ -31,13 +31,13 @@ var PissWhistle = {
     if ($.inArray(data._id['$oid'], messageIds) > -1) {
       return false;
     } else {
-      this.messages.push(data);
       return true;
     }
   },
 
   process: function(data) {
     if (this.is_new_message(data)) {
+      this.messages.push(data);
       $.each((this.handlers[data.type] || []).concat(this.globalHandlers), function(i, handler) {
         try {
           handler.process(data);
