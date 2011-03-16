@@ -18,7 +18,6 @@ $(document).ready(function () {
   PissWhistle.addHandler(new Deploy("#misc"));
   PissWhistle.addHandler(new Github("#misc"));
   PissWhistle.addHandler(new Presence("#presence"));
-  PissWhistle.addHandler(new Twitter("#chat"));
   PissWhistle.addHandler(new UnreadMessageCount());
 
   Notifier.initialize();
