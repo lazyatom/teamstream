@@ -26,7 +26,7 @@ var PissWhistle = {
     this.connection.send(data_with_user);
   },
 
-  is_new_message: function(data) {
+  isNewMessage: function(data) {
     var messageIds = $.map(this.messages, function(m) { return m._id['$oid']} );
     if ($.inArray(data._id['$oid'], messageIds) > -1) {
       return false;
@@ -36,7 +36,7 @@ var PissWhistle = {
   },
 
   process: function(data) {
-    if (this.is_new_message(data)) {
+    if (this.isNewMessage(data)) {
       this.messages.push(data);
       $.each((this.handlers[data.type] || []).concat(this.globalHandlers), function(i, handler) {
         try {
