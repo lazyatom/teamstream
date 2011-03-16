@@ -64,7 +64,7 @@ var PissWhistle = {
     var link = $.a("view earlier messages",{href:"#"});
     link.click(function() {
       var earliest_timestamp = $("."+ type + " time").first().attr("title");
-      self.connection.loadHistory(self.stream_name, type, earliest_timestamp, function(messages) {
+      self.loadMessages(type, {since: earliest_timestamp}, function(messages) {
         $($.makeArray(messages).reverse()).each(function(index, message) {
           self.process(message);
         });
@@ -78,13 +78,15 @@ var PissWhistle = {
     $(panel).prepend(listElement);
   },
 
-  loadMessages: function(type) {
+  loadMessages: function(type, _options, _callback) {
+    var options = $.extend({}, _options);
     var self = this;
-    this.connection.loadMessages(this.stream_name, type, function(messages) {
+    var callback = _callback || function(messages) {
       $(messages).each(function(index, message) {
         self.process(message);
       })
-    });
+    };
+    this.connection.loadMessages(this.stream_name, type, options, callback);
   },
 
   loadStreams: function(callback) {
@@ -204,17 +206,11 @@ var PissWhistle = {
       return x > now;
     },
 
-    loadMessages: function(stream_name, type, callback) {
+    loadMessages: function(stream_name, type, _options, callback) {
       var self = this;
       this.ensureAuthenticated(function(token) {
-        $.getJSON('http://'+self.stream_host+':' + self.stream_port+'/' + stream_name + '/messages', {type: type, oauth_token: token}, callback);
-      })
-    },
-
-    loadHistory: function(stream_name, type, earliest_timestamp, callback) {
-      var self = this;
-      this.ensureAuthenticated(function(token) {
-        $.getJSON('http://'+self.stream_host+':' + self.stream_port+'/' + stream_name + '/messages', {type: type, since:earliest_timestamp, oauth_token: token}, callback);
+        var options = $.extend({type: type, oauth_token: token}, _options)
+        $.getJSON('http://'+self.stream_host+':' + self.stream_port+'/' + stream_name + '/messages', options, callback);
       })
     },
 
