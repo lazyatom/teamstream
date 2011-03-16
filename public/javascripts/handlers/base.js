@@ -6,40 +6,25 @@ $.extend(Base.prototype, {
   respondTo: [],
   panel: null,
 
-  process: function(data, historical) {
+  process: function(data) {
     var message = this.message(data);
     var from = this.from(data);
     message.append(from);
     message.append(this.timestamp(data));
     message.append(this.messageContent(data));
     message.data('message', data);
-    if (historical) {
-      var messages = this.panel.find(".message");
-      if (messages.length > 0) {
-        var first_message = messages.first().data().message;
-        var same_type = (first_message.type == data.type);
-        var same_user = (first_message.user == data.user);
-        if (same_user && same_type) {
-          this.panel.find('.message:first .from').addClass('no_from_change');
-        } else {
-          this.panel.find('.message:first .from').removeClass('no_from_change');
-        }
+    var messages = this.panel.find(".message");
+    if (messages.length > 0) {
+      var last_message = messages.last().data().message;
+      var same_type = (last_message.type == data.type);
+      var same_user = (last_message.user == data.user);
+      if (same_user && same_type) {
+        $(from).addClass('no_from_change');
+      } else {
+        $(from).removeClass('no_from_change');
       }
-      this.panel.prepend(message);
-    } else {
-      var messages = this.panel.find(".message");
-      if (messages.length > 0) {
-        var last_message = messages.last().data().message;
-        var same_type = (last_message.type == data.type);
-        var same_user = (last_message.user == data.user);
-        if (same_user && same_type) {
-          $(from).addClass('no_from_change');
-        } else {
-          $(from).removeClass('no_from_change');
-        }
-      }
-      this.panel.append(message);
     }
+    this.panel.append(message);
     return message;
   },
 
