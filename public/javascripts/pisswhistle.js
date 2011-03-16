@@ -81,10 +81,6 @@ var PissWhistle = {
     }
   },
 
-  display_error: function(message) {
-    $('#chat').text("ERROR: " + message);
-  },
-
   streamNameFromUrl: function() {
     return $(document.location.pathname.split("/")).last()[0];
   },
