@@ -57,27 +57,6 @@ var PissWhistle = {
     this.resizePanels();
   },
 
-  addHistoryLink: function(type, panel) {
-    var self = this;
-
-    var listElement = $.li("", {"class":"history_link"});
-    var link = $.a("view earlier messages",{href:"#"});
-    link.click(function() {
-      var earliest_timestamp = $("."+ type + " time").first().attr("title");
-      self.loadMessages(type, {since: earliest_timestamp}, function(messages) {
-        $($.makeArray(messages).reverse()).each(function(index, message) {
-          self.process(message);
-        });
-        $(".history_link", panel).remove();
-        self.addHistoryLink(type, panel);
-      });
-      return false;
-    });
-    listElement.append(link);
-
-    $(panel).prepend(listElement);
-  },
-
   loadMessages: function(type, _options, _callback) {
     var options = $.extend({}, _options);
     var self = this;

@@ -2,6 +2,7 @@ var Chat = function Chat(panel) {
   this.panel = $(panel);
   this.prepareDOM(this.panel);
   this.setupInput();
+  this.setupHistoryScroll();
 }
 
 Chat.prototype = new Base;
@@ -119,5 +120,22 @@ $.extend(Chat.prototype, {
 
   isCorrection: function(text) {
     return !(text.match(/^s\/[\w\s]+\/[\w\s]+/) == null);
+  },
+
+  setupHistoryScroll: function() {
+    var self = this;
+    self.panel.scroll(function(){
+      if (self.panel.scrollTop() == 0){
+        var currentElement = self.panel.find(".message").first();
+        var earliestTimestamp = currentElement.find("time").first().attr("title");
+        PissWhistle.loadMessages("chat", {since: earliestTimestamp}, function(messages) {
+          $($.makeArray(messages).reverse()).each(function(index, message) {
+            PissWhistle.process(message);
+          });
+          var pos = currentElement.position().top;
+          self.panel.scrollTop(pos);
+        });
+      }
+    });
   }
 });

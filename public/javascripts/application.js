@@ -32,7 +32,6 @@ $(document).ready(function () {
   } else {
     PissWhistle.loadMessages('hudson');
     PissWhistle.loadMessages('chat');
-    PissWhistle.addHistoryLink('chat', '#chat');
 
     setTimeout(function() { PissWhistle.connect()}, 500);
     setTimeout(function() { PissWhistle.scrollPanelsToBottom(); },1000);
