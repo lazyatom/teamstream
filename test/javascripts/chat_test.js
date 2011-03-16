@@ -60,7 +60,7 @@ test("display author name only once when they are the same for consecutive messa
 
 test("add multiple messages not in timestamp order", function() {
   world.chat.process(world.messageFactory({content: 'second message', timestamp: '2011-03-15T12:32:01Z'}));
-  world.chat.process(world.messageFactory({content: 'first message', timestamp: '2011-03-15T12:32:00Z'}), true);
+  world.chat.process(world.messageFactory({content: 'first message', timestamp: '2011-03-15T12:32:00Z'}));
 
   equals(world.messagesFromDom()[0].content, 'first message');
   equals(world.messagesFromDom()[1].content, 'second message');
@@ -95,8 +95,8 @@ test("ordering and author display is correct when adding multiple messages not i
 
   // historical messages are provided by the PissWhistle class in reversed order, which is a hack that could be removed
   // that behaviour is replicated here, for now.
-  world.chat.process(world.messageFactory({user: 'james', content: 'message two', timestamp: '2011-03-15T12:32:02Z'}), true);
-  world.chat.process(world.messageFactory({user: 'james', content: 'message one', timestamp: '2011-03-15T12:32:01Z'}), true);
+  world.chat.process(world.messageFactory({user: 'james', content: 'message two', timestamp: '2011-03-15T12:32:02Z'}));
+  world.chat.process(world.messageFactory({user: 'james', content: 'message one', timestamp: '2011-03-15T12:32:01Z'}));
 
   equals(world.messagesFromDom()[0].author, 'james');
   equals(world.messagesFromDom()[1].author, undefined);

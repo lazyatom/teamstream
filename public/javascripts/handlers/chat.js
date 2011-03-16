@@ -12,15 +12,22 @@ $.extend(Chat.prototype, {
   input: null,
   user: null,
 
-  process: function(data, historical) {
+  process: function(data) {
     var message = this.message(data);
     var from = this.from(data);
     message.append(from);
     message.append(this.timestamp(data));
     message.append(this.messageContent(data));
     message.data('message', data);
+
+    var messages = this.panel.find(".message");
+    var historical = false;
+    if (messages.length > 0) {
+      var timestampOfEarliestMessage = new Date(messages.first().data().message.timestamp);
+      historical = new Date(data.timestamp) < timestampOfEarliestMessage;
+    }
+
     if (historical) {
-      var messages = this.panel.find(".message");
       if (messages.length > 0) {
         var first_message = messages.first().data().message;
         var same_type = (first_message.type == data.type);
@@ -33,7 +40,6 @@ $.extend(Chat.prototype, {
       }
       this.panel.prepend(message);
     } else {
-      var messages = this.panel.find(".message");
       if (messages.length > 0) {
         var last_message = messages.last().data().message;
         var same_type = (last_message.type == data.type);

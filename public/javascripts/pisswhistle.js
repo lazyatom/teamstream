@@ -46,7 +46,7 @@ var PissWhistle = {
     if (historical || this.is_new_message(data)) {
       $.each((this.handlers[data.type] || []).concat(this.globalHandlers), function(i, handler) {
         try {
-          handler.process(data, historical);
+          handler.process(data);
         } catch(err) {
           console.log("Error handling message", handler, err, data);
         }
