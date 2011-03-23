@@ -23,8 +23,8 @@ module SprocketsRenderer
 
   def sprockets_options(options = {})
     options.merge(
-      :load_path => [ "public/javascripts"],
-      :source_files => ["public/javascripts/application.js", "public/javascripts/handlers/**/*.js", "public/javascripts/include/**/*.js"]
+      :load_path => [ "public/javascripts", "public/javascripts/vendor"],
+      :source_files => ["public/javascripts/application.js", "public/javascripts/**/*.js"]
     )
   end
 end
