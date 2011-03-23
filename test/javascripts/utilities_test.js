@@ -79,3 +79,18 @@ test("should convert a datetime string with milliseconds to a string in iso8601 
 test("should convert a github datetime string to a string in iso8601 format", function() {
   equals('2011-01-02T10:11:12Z', $.iso8601("2011/01/02 02:11:12 -0800"))
 });
+
+
+module("Utilities parseDate()");
+
+test("should convert a chat message datetime string to a Date", function() {
+  equals(new Date('2011/01/02 10:11:12').valueOf(), $.parseDate("2011-01-02T10:11:12+00:00").valueOf())
+});
+
+test("should convert a datetime string with milliseconds to a Date", function() {
+  equals(new Date('2011/01/02 10:11:12').valueOf(), $.parseDate("2011-01-02T10:11:12.345Z").valueOf())
+});
+
+test("should convert a github datetime string to a Date", function() {
+  equals(new Date('2011/01/02 10:11:12').valueOf(), $.parseDate("2011/01/02 02:11:12 -0800").valueOf())
+});
