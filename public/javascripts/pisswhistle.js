@@ -233,10 +233,15 @@ var PissWhistle = {
         grant_type: "authorization_code",
         code: authorization_code
       }, function(data) {
-        self.oauth.token = data.access_token;
-        $.cookie('oauth_token', self.oauth.token, {expires: 365});
-        window.history.pushState(null, "without code", window.location.pathname);
-        callback(self.oauth.token);
+        if (data == null) {
+          console.log("unable to obtain access token");
+        } else {
+          console.log("access token obtained");
+          self.oauth.token = data.access_token;
+          $.cookie('oauth_token', self.oauth.token, {expires: 365});
+          window.history.pushState(null, "without code", window.location.pathname);
+          callback(self.oauth.token);
+        }
       }, "json")
     }
   }
