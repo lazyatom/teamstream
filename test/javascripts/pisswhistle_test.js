@@ -1,4 +1,4 @@
-module("PissWhistle");
+module("PissWhistle handlers");
 
 test("should only invoke handlers that respond to the type of the data being processed", function() {
   var handler1Buffer = '';
@@ -71,3 +71,27 @@ test("should ignore messages that have already been received", function() {
 
   equals(handlerBuffer, 'hello');
 })
+
+module("PissWhistle connection management", {
+  setup: function() {
+    $("#qunit-fixture").append('<div id="disconnected" style="display: none"></div>');
+  }
+});
+
+test("should show disconnected message when the connection isn't connected", function() {
+  PissWhistle.connection = {
+    is_connected : function() { return false }
+  }
+  PissWhistle.check_connection()
+
+  ok($("#disconnected:visible").length > 0)
+});
+
+test("should not show the disconnect message when the connection is connection", function() {
+  PissWhistle.connection = {
+    is_connected : function() { return true }
+  }
+  PissWhistle.check_connection()
+
+  ok($("#disconnected:visible").length == 0)
+});
