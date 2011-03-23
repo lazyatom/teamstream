@@ -65,7 +65,7 @@ $.iso8601 = function(date) {
   function pad(n){
     return n<10 ? '0'+n : n
   }
-  d = new Date(date);
+  d = new Date(date.replace(/-/g, "/").replace("T", " ").replace("Z", ""));
   return d.getUTCFullYear()+'-'
   + pad(d.getUTCMonth()+1)+'-'
   + pad(d.getUTCDate())+'T'
