@@ -21,8 +21,8 @@ $.extend(Github.prototype, {
     var link = $.a(number_of_commits, { href: original.compare, target: "_blank" });
     contentSpan.append(link);
     contentSpan.append(" pushed ");
-    var pushedAt = new Date(data.original.repository.pushed_at);
-    var timestamp = $.time(this.iso8601(pushedAt), {"datetime": this.iso8601(pushedAt),"class": 'pushed_at timestamp timeago'}).timeago()
+    var pushedAt = this.iso8601(data.original.repository.pushed_at);
+    var timestamp = $.time(pushedAt, {"datetime": pushedAt,"class": 'pushed_at timestamp timeago'}).timeago()
     contentSpan.append(timestamp);
 
     $.each(original.commits, function(index, commit){
