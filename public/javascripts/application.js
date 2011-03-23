@@ -31,6 +31,7 @@ $(document).ready(function () {
   } else {
     PissWhistle.loadMessages('hudson');
     PissWhistle.loadMessages('chat');
+    PissWhistle.loadMessages('github');
 
     setTimeout(function() { PissWhistle.connect()}, 500);
 
