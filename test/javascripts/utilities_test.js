@@ -1,4 +1,4 @@
-module("Utilities");
+module("Utilities autolink()");
 
 test("should convert a URL into an HTML anchor tag", function() {
   span = $.span('http://www.example.com/');
@@ -63,4 +63,19 @@ test("should convert a URL with a query string surrounded by parentheses into an
   span.autolink();
   anchor = span.children('a').first();
   equals(anchor.attr('href'), 'http://example.com/blah?query=1');
+});
+
+
+module("Utilities iso8601()");
+
+test("should convert a chat message datetime string to a string in iso8601 format", function() {
+  equals('2011-01-02T10:11:12Z', $.iso8601("2011-01-02T10:11:12+00:00"))
+});
+
+test("should convert a datetime string with milliseconds to a string in iso8601 format", function() {
+  equals('2011-01-02T10:11:12Z', $.iso8601("2011-01-02T10:11:12.345Z"))
+});
+
+test("should convert a github datetime string to a string in iso8601 format", function() {
+  equals('2011-01-02T10:11:12Z', $.iso8601("2011/01/02 02:11:12 -0800"))
 });

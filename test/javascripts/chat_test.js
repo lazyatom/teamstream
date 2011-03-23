@@ -111,7 +111,8 @@ test("ordering and author display is correct when adding multiple messages not i
 test("should display the timestamp in a human-friendly format", function() {
   var now = new Date();
   var fiveMinutes = 5 * 60 * 1000;
-  world.chat.process(world.messageFactory({timestamp: $.iso8601(now - fiveMinutes)}));
+  var fiveMinutesAgoAsISO = new Date(now - fiveMinutes).toISOString();
+  world.chat.process(world.messageFactory({timestamp: $.iso8601(fiveMinutesAgoAsISO)}));
   equals(world.messagesFromDom()[0].humanizedTimestamp, '5 minutes ago');
 })
 
