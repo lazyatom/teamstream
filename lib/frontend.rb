@@ -4,9 +4,8 @@ require "less"
 require "haml"
 
 class FrontEnd < Sinatra::Base
-  autoload :SprocketsRenderer, "sprockets_renderer"
-
-  include SprocketsRenderer
+  autoload :SprocketsHelper, "helpers/sprockets_helper"
+  include SprocketsHelper
 
   configure :development do
     enable :logging, :dump_errors, :raise_errors
@@ -21,13 +20,13 @@ class FrontEnd < Sinatra::Base
     set :root, File.expand_path("../", __FILE__)
   end
 
+  before do
+    check_and_create_sprockets
+  end
+
   get '/app.css' do
     content_type 'text/css', :charset => 'utf-8'
     less :stylesheet
-  end
-
-  get '/sprockets.js' do
-    render_sprockets
   end
 
   get '/' do
