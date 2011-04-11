@@ -24,9 +24,7 @@ test("should only invoke handlers that respond to the type of the data being pro
   PissWhistle.initialize();
 
   var data = {
-    _id: {
-      '$oid': 'abc'
-    },
+    id: 'abc',
     type:    'message',
     content: 'testContent'
   };
@@ -49,8 +47,8 @@ test("should invoke global handlers for all messages regardless of type", functi
 
   PissWhistle.initialize();
 
-  PissWhistle.process({_id: {'$oid': 'abc'}, type:'message',     content: 'good'})
-  PissWhistle.process({_id: {'$oid': 'def'}, type:'not-message', content: 'times'})
+  PissWhistle.process({id: 'abc', type:'message',     content: 'good'})
+  PissWhistle.process({id: 'def', type:'not-message', content: 'times'})
 
   equals(handlerBuffer, 'goodtimes');
 })
@@ -65,7 +63,7 @@ test("should ignore messages that have already been received", function() {
 
   PissWhistle.initialize();
 
-  var message = {_id: {'$oid': 'abc'}, type: 'message', content: 'hello'};
+  var message = {id: 'abc', type: 'message', content: 'hello'};
   PissWhistle.process(message);
   PissWhistle.process(message);
 

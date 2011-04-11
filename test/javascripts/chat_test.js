@@ -6,9 +6,7 @@ module("Chat", {
     world = {
       messageFactory: function(attributes) {
         var defaults = {
-          _id: {
-            '$oid': '4d7f5e2e5b4f52703c00009c'
-          },
+          id: '4d7f5e2e5b4f52703c00009c',
           'content': 'blah blah blah',
           timestamp: '2011-03-15T12:32:04Z'
         }
