@@ -76,6 +76,15 @@ module("PissWhistle connection management", {
   }
 });
 
+test("should not show the disconnect message when the connection is connected", function() {
+  PissWhistle.connection = {
+    is_connected : function() { return true }
+  }
+  PissWhistle.check_connection()
+
+  ok($("#disconnected:visible").length == 0)
+});
+
 test("should show disconnected message when the connection isn't connected", function() {
   PissWhistle.connection = {
     is_connected : function() { return false }
@@ -85,11 +94,15 @@ test("should show disconnected message when the connection isn't connected", fun
   ok($("#disconnected:visible").length > 0)
 });
 
-test("should not show the disconnect message when the connection is connection", function() {
+test("should not show disconnected message when the connection is re-connected", function() {
+  var connected = false;
   PissWhistle.connection = {
-    is_connected : function() { return true }
+    is_connected : function() { return connected }
   }
-  PissWhistle.check_connection()
+  PissWhistle.check_connection();
+  connected = true;
+  PissWhistle.check_connection();
 
   ok($("#disconnected:visible").length == 0)
 });
+
