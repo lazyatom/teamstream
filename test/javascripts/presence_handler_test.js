@@ -9,7 +9,7 @@ module("Presence handler", {
   }
 });
 
-test("should only respond to chat messages", function() {
+test("should only respond to presence messages", function() {
   equals(world.presence.respondTo[0], 'presence');
   equals(world.presence.respondTo.length, 1);
 });
