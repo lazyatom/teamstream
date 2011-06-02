@@ -20,8 +20,8 @@ test("given an existing presence messages, when a new status is received, should
   world.status.process({type: 'status', user:'alice', original:{message:'I am playing at the moment'}});
 
   var statuses_for_accounts = $.map($("#qunit-fixture #presence ol li"), function(item) {
-    if ($("span", item).length > 0) {
-      return $("span", item).text();
+    if ($(".status", item).length > 0) {
+      return $(".status", item).text();
     }
   });
 
@@ -36,8 +36,8 @@ test("Given a presence and status for a user, when a new status is received remo
   world.status.process({type: 'status', user:'alice', original:{message:'Working on Teamstream'}});
 
   var statuses_for_accounts = $.map($("#qunit-fixture #presence ol li"), function(item) {
-    if ($("span", item).length > 0) {
-      return $("span", item).text();
+    if ($(".status", item).length > 0) {
+      return $(".status", item).text();
     }
   });
 

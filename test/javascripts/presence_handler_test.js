@@ -4,7 +4,8 @@ module("Presence handler", {
   setup: function() {
     $("#qunit-fixture").append("<div id='presence'></div>");
     world = {
-      presence: new Presence("#qunit-fixture #presence")
+      presence: new Presence("#qunit-fixture #presence"),
+      status: new Status("#qunit-fixture #presence")
     };
   }
 });
@@ -26,7 +27,7 @@ test("should add a list of accounts to the pane", function() {
   equals(accounts[1], 'bob');
 })
 
-test("given an existing message, when a new message is received, should replace the list of accounts", function() {
+test("given an existing presence, when a new presence is received, should remove the user that has left", function() {
   world.presence.process({type: 'presence', accounts:['alice', 'bob']});
   world.presence.process({type: 'presence', accounts:['alice']});
 
@@ -34,6 +35,17 @@ test("given an existing message, when a new message is received, should replace 
   var accounts = $.map(presence.find("li"), function(item) {
     return $(item).text();
   });
+
   equals(accounts.length, 1);
   equals(accounts[0], 'alice');
 })
+
+test("given an existing presence and status, when new presence is received don't clear status message", function() {
+
+  world.presence.process({type: 'presence', accounts:['alice', 'bob']});
+  world.status.process({type: 'status', user:'bob', original:{message:'I am playing at the moment'}});
+
+  world.presence.process({type: 'presence', accounts:['bob']});
+
+  equals($("#qunit-fixture #presence li#bob span.status").text(), " (I am playing at the moment)");
+});
